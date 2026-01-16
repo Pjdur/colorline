@@ -13,6 +13,7 @@ Supported colors:
 - Blue
 - Magenta
 - Cyan
+- Grey
 
 ## Example
 
