@@ -45,13 +45,16 @@ pub trait Style {
 
     /// Colors the text cyan (light blue).
     fn cyan(&self) -> String;
-    
+
+    /// Colors the text grey.
+    fn grey(&self) -> String;
+
     /// Makes the text bold.
     fn bold(&self) -> String;
 }
 
 /// Implementation of `Style` for string slices (`&str`).
-/// 
+///
 /// This allows you to call methods like `"Hello".red()` directly.
 impl Style for &str {
     fn red(&self) -> String {
@@ -72,21 +75,41 @@ impl Style for &str {
     fn cyan(&self) -> String {
         format!("\x1b[36m{}\x1b[0m", self)
     }
+    fn grey(&self) -> String {
+        format!("\x1b[90m{}\x1b[0m", self)
+    }
     fn bold(&self) -> String {
         format!("\x1b[1m{}\x1b[0m", self)
     }
 }
 
 /// Implementation of `Style` for owned `String`.
-/// 
+///
 /// This delegates to the `&str` implementation, so you can also call
 /// methods like `my_string.red()` if you have a `String`.
 impl Style for String {
-    fn red(&self) -> String { self.as_str().red() }
-    fn green(&self) -> String { self.as_str().green() }
-    fn yellow(&self) -> String { self.as_str().yellow() }
-    fn blue(&self) -> String { self.as_str().blue() }
-    fn magenta(&self) -> String { self.as_str().magenta() }
-    fn cyan(&self) -> String { self.as_str().cyan() }
-    fn bold(&self) -> String { self.as_str().bold() }
+    fn red(&self) -> String {
+        self.as_str().red()
+    }
+    fn green(&self) -> String {
+        self.as_str().green()
+    }
+    fn yellow(&self) -> String {
+        self.as_str().yellow()
+    }
+    fn blue(&self) -> String {
+        self.as_str().blue()
+    }
+    fn magenta(&self) -> String {
+        self.as_str().magenta()
+    }
+    fn cyan(&self) -> String {
+        self.as_str().cyan()
+    }
+    fn grey(&self) -> String {
+        format!("\x1b[90m{}\x1b[0m", self)
+    }
+    fn bold(&self) -> String {
+        self.as_str().bold()
+    }
 }
